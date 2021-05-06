@@ -1,5 +1,7 @@
 package com.example.myapplication;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -65,6 +67,20 @@ public class MainActivity extends AppCompatActivity {
                         textView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 100));
                         textView.setText((j + 1) * 10 + "个积分");
                         textView.setGravity(Gravity.CENTER);
+                        String url = "https://www.baidu.com";
+                        if (j % 2 == 0) {
+                            url = "https://www.taobao.com";
+                        }
+                        String finalUrl = url;
+                        textView.setOnClickListener(view -> {
+                            Intent intent = new Intent();
+//Intent intent = new Intent(Intent.ACTION_VIEW,uri);
+                            intent.setAction("android.intent.action.VIEW");
+
+                            Uri content_url = Uri.parse(finalUrl);
+                            intent.setData(content_url);
+                            startActivity(intent);
+                        });
                         ll3.addView(textView);
                     }
                 } catch (Exception e) {
